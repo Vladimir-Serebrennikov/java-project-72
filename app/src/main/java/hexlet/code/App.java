@@ -28,8 +28,7 @@ public final class App {
         var dataSource = new HikariDataSource(hikariConfig);
         var url = App.class.getClassLoader().getResource("schema.sql");
         var file = new File(url.getFile());
-        var sql = Files.lines(file.toPath())
-                .collect(Collectors.joining("\n"));
+        var sql = Files.readString(file.toPath());
 
         log.info(sql);
         try (var connection = dataSource.getConnection();
