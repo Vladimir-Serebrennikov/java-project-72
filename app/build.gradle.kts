@@ -5,6 +5,7 @@ plugins {
     id("checkstyle")
     id("com.adarshr.test-logger") version "4.0.0"
     id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("com.github.ben-manes.versions") version "0.47.0"
     id("io.freefair.lombok") version "8.3"
 }
 
