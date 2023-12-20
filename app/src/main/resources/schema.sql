@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS urls;
 
-CREATE TABLE products (
+CREATE TABLE urls (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    title VARCHAR(255) NOT NULL,
-    price INT
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NOT NULL
 );
