@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import io.javalin.Javalin;
 import io.javalin.testtools.JavalinTest;
-import hexlet.code.repository.ProductsRepository;
-import hexlet.code.model.Product;
+import hexlet.code.repository.UrlsRepository;
+import hexlet.code.model.Url;
 
 class AppTest {
 
@@ -36,8 +36,8 @@ class AppTest {
 
     @Test
     public void testProductPage() throws Exception {
-        var product = new Product("car", 100);
-        ProductsRepository.save(product);
+        var product = new Url("car", 100);
+        UrlsRepository.save(product);
         JavalinTest.test(app, (server, client) -> {
             var response = client.get("/products/" + product.getId());
             assertThat(response.code()).isEqualTo(200);
@@ -61,7 +61,7 @@ class AppTest {
             assertThat(response.body().string()).contains("car");
         });
 
-        assertThat(ProductsRepository.getEntities()).hasSize(1);
+        assertThat(UrlsRepository.getEntities()).hasSize(1);
     }
 
 }

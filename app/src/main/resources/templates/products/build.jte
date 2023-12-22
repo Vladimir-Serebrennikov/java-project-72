@@ -1,4 +1,4 @@
-@import hexlet.code.dto.products.BuildProductPage
+@import hexlet.code.dto.urls.BuildProductPage
 @import hexlet.code.util.NamedRoutes;
 @param BuildProductPage page
 

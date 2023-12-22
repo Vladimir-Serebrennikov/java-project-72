@@ -1,6 +1,6 @@
-@import hexlet.code.dto.products.ProductsPage
+@import hexlet.code.dto.urls.UrlsPage
 @import hexlet.code.util.NamedRoutes
-@param ProductsPage page
+@param UrlsPage page
 
 @template.layout.page(
 
