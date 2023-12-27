@@ -34,6 +34,8 @@ dependencies {
     implementation("gg.jte:jte:3.0.1")
     implementation("com.h2database:h2:2.2.220")
     implementation("com.zaxxer:HikariCP:5.0.1")
+    implementation("com.konghq:unirest-java:3.14.5")
+    implementation("org.jsoup:jsoup:1.16.2")
 }
 
 tasks.test {
