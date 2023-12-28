@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.stream.Collectors;
+
+import hexlet.code.controller.UrlCheckController;
 import hexlet.code.controller.UrlsController;
 import hexlet.code.controller.RootController;
 import hexlet.code.util.NamedRoutes;
@@ -45,8 +47,11 @@ public final class App {
             config.plugins.enableDevLogging();
         });
 
-        app.get(NamedRoutes.rootPath(), RootController::index);
+        app.get(NamedRoutes.urlsPath(), UrlsController::index);
+        app.get(NamedRoutes.rootPath(), UrlsController::build);
+        app.get(NamedRoutes.urlPath("{id}"), UrlsController::show);
         app.post(NamedRoutes.urlsPath(), UrlsController::create);
+        app.post(NamedRoutes.urlCheckPath("{id}"), UrlCheckController::create);
 
         return app;
     }
