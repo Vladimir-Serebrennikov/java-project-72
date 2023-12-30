@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 import hexlet.code.controller.UrlCheckController;
 import hexlet.code.controller.UrlsController;
-import hexlet.code.controller.RootController;
 import hexlet.code.util.NamedRoutes;
 import hexlet.code.repository.BaseRepository;
 import gg.jte.ContentType;

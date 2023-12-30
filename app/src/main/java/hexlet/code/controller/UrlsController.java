@@ -40,7 +40,7 @@ public class UrlsController {
             ).toLowerCase();
             var createdAt = new Timestamp(System.currentTimeMillis());
             var url = new Url(normalUrl, createdAt);
-            if(!UrlsRepository.findByName(url.getName()).equals(Optional.empty())) {
+            if (!UrlsRepository.findByName(url.getName()).equals(Optional.empty())) {
                 ctx.sessionAttribute("flash", "Страница уже существует");
                 ctx.redirect(NamedRoutes.urlsPath());
             } else {
@@ -67,7 +67,7 @@ public class UrlsController {
         var url = UrlsRepository.findById(id)
                 .orElseThrow(() -> new NotFoundResponse("Entity with id: " + id + " not found"));
         List<UrlCheck> urlCheck = UrlCheckRepository.findByUrlId(id);
-        var page = new UrlPage(url,urlCheck);
+        var page = new UrlPage(url, urlCheck);
         page.setFlash(ctx.consumeSessionAttribute("flash"));
         ctx.render("urls/show.jte", Collections.singletonMap("page", page));
     }

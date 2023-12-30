@@ -9,7 +9,6 @@ import io.javalin.http.NotFoundResponse;
 import kong.unirest.Unirest;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -17,7 +16,7 @@ import java.sql.Timestamp;
 @Slf4j
 public class UrlCheckController {
     public static void create(Context ctx) throws SQLException {
-        var urlId= ctx.pathParamAsClass("id", Long.class).get();
+        var urlId = ctx.pathParamAsClass("id", Long.class).get();
         try {
             var url = UrlsRepository.findById(urlId)
                     .orElseThrow(() -> new NotFoundResponse("Entity with id: " + urlId + " not found"));
