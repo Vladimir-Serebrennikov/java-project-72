@@ -37,6 +37,7 @@ dependencies {
     implementation("com.zaxxer:HikariCP:5.0.1")
     implementation("com.konghq:unirest-java:3.14.5")
     implementation("org.jsoup:jsoup:1.16.2")
+    implementation("org.postgresql:postgresql:42.6.0")
 }
 
 tasks.test {
