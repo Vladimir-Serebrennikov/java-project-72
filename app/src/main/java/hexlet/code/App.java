@@ -1,13 +1,10 @@
 package hexlet.code;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.sql.SQLException;
-import java.util.stream.Collectors;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.sql.SQLException;
 import hexlet.code.controller.UrlCheckController;
 import hexlet.code.controller.UrlsController;
 import hexlet.code.util.NamedRoutes;
@@ -30,10 +27,10 @@ public final class App {
         String jdbcUrl = System.getenv().getOrDefault("JDBC_DATABASE_URL", "jdbc:h2:mem:project");
         hikariConfig.setJdbcUrl(jdbcUrl);
 
-        JavalinJte.init(createTemplateEngine());
-
         var dataSource = new HikariDataSource(hikariConfig);
-        var sql = readSchemaFile();
+        var url = App.class.getClassLoader().getResource("schema.sql");
+        var file = new File(url.getFile());
+        String sql = Files.readString(file.toPath());
 
         log.info(sql);
         try (var connection = dataSource.getConnection();
@@ -45,6 +42,7 @@ public final class App {
         var app = Javalin.create(config -> {
             config.plugins.enableDevLogging();
         });
+        JavalinJte.init(createTemplateEngine());
 
         app.get(NamedRoutes.urlsPath(), UrlsController::index);
         app.get(NamedRoutes.rootPath(), UrlsController::build);
@@ -55,14 +53,6 @@ public final class App {
         return app;
     }
 
-    private static String readSchemaFile() throws IOException {
-        try (InputStream inputStream = App.class.getClassLoader().getResourceAsStream("schema.sql");
-             InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-             BufferedReader reader = new BufferedReader(streamReader)) {
-            return reader.lines().collect(Collectors.joining("\n"));
-        }
-    }
-
     private static TemplateEngine createTemplateEngine() {
         ClassLoader classLoader = App.class.getClassLoader();
         ResourceCodeResolver codeResolver = new ResourceCodeResolver("templates", classLoader);
@@ -70,8 +60,13 @@ public final class App {
         return templateEngine;
     }
 
+    private static int getPort() {
+        String port = System.getenv().getOrDefault("PORT", "7070");
+        return Integer.parseInt(port);
+    }
+
     public static void main(String[] args) throws IOException, SQLException {
         Javalin app = getApp();
-        app.start(7070);
+        app.start(getPort());
     }
 }
