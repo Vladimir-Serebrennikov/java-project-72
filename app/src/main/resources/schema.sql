@@ -13,7 +13,7 @@ CREATE TABLE url_checks (
     status_code INT NOT NULL,
     h1 VARCHAR(255),
     title VARCHAR(255),
-    description LONGTEXT,
+    description TEXT,
     created_at TIMESTAMP NOT NULL,
     FOREIGN KEY (url_id) REFERENCES urls(id)
 );

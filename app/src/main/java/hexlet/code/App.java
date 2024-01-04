@@ -1,10 +1,15 @@
 package hexlet.code;
 
 
-import java.io.File;
+
 import java.io.IOException;
-import java.nio.file.Files;
+import java.io.InputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.util.stream.Collectors;
+
 import hexlet.code.controller.UrlCheckController;
 import hexlet.code.controller.UrlsController;
 import hexlet.code.util.NamedRoutes;
@@ -28,9 +33,7 @@ public final class App {
         hikariConfig.setJdbcUrl(jdbcUrl);
 
         var dataSource = new HikariDataSource(hikariConfig);
-        var url = App.class.getClassLoader().getResource("schema.sql");
-        var file = new File(url.getFile());
-        String sql = Files.readString(file.toPath());
+        var sql = readSchemaFile();
 
         log.info(sql);
         try (var connection = dataSource.getConnection();
@@ -58,6 +61,14 @@ public final class App {
         ResourceCodeResolver codeResolver = new ResourceCodeResolver("templates", classLoader);
         TemplateEngine templateEngine = TemplateEngine.create(codeResolver, ContentType.Html);
         return templateEngine;
+    }
+
+    private static String readSchemaFile() throws IOException {
+        try (InputStream inputStream = App.class.getClassLoader().getResourceAsStream("schema.sql");
+             InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+             BufferedReader reader = new BufferedReader(streamReader)) {
+            return reader.lines().collect(Collectors.joining("\n"));
+        }
     }
 
     private static int getPort() {
