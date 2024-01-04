@@ -28,6 +28,12 @@ public final class App {
 
     public static Javalin getApp() throws IOException, SQLException {
 
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            log.error("PostgreSQL Driver not found", e);
+        }
+
         var hikariConfig = new HikariConfig();
         String jdbcUrl = System.getenv().getOrDefault("JDBC_DATABASE_URL", "jdbc:h2:mem:project");
         hikariConfig.setJdbcUrl(jdbcUrl);
