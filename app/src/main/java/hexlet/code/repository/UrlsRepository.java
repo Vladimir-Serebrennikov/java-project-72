@@ -14,6 +14,7 @@ public class UrlsRepository extends BaseRepository {
         String sql = "INSERT INTO urls (name, created_at) VALUES (?, ?)";
         try (var conn = dataSource.getConnection();
              var preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            url.setCreatedAt(new Timestamp(System.currentTimeMillis()));
             preparedStatement.setString(1, url.getName());
             preparedStatement.setTimestamp(2, url.getCreatedAt());
             preparedStatement.executeUpdate();
