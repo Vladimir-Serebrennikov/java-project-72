@@ -5,8 +5,9 @@ import lombok.Setter;
 import java.sql.Timestamp;
 
 @Getter
+@Setter
 public class Url {
-    @Setter
+
     private Long id;
 
     private String name;

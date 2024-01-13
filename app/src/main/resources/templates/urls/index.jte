@@ -6,8 +6,13 @@
 @template.layout.page(
 page = page,
 content = @`
-    @if(page != null && page.getFlash() != null)
+    @if(page != null && page.getFlash() != null && page.getFlash().equals("Страница успешно добавлена"))
         <div class="rounded-0 m-0 alert alert-dismissible fade show alert-success" role="alert">
+            <p class="m-0">${page.getFlash()}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @elseif(page != null && page.getFlash() != null && page.getFlash().equals("Страница уже существует"))
+        <div class="rounded-0 m-0 alert alert-dismissible fade show alert-danger" role="alert">
             <p class="m-0">${page.getFlash()}</p>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
