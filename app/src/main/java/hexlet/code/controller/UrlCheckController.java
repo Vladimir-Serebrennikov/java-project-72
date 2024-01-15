@@ -10,6 +10,7 @@ import kong.unirest.Unirest;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 
+import java.rmi.ConnectException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
@@ -34,8 +35,8 @@ public class UrlCheckController {
             var urlCheck = new UrlCheck(statusCode, title, h1, description, urlId, createdAt);
             UrlCheckRepository.save(urlCheck);
             ctx.sessionAttribute("flash", "Страница успешно проверена");
-        } catch (Exception e) {
-            ctx.sessionAttribute("flash", "Некорректный URL");
+        }  catch (Exception e) {
+            ctx.sessionAttribute("flash", "Некорректный адрес");
         } finally {
             ctx.redirect(NamedRoutes.urlPath(urlId));
         }
