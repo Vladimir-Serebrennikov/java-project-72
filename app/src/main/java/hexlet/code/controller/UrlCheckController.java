@@ -10,7 +10,6 @@ import kong.unirest.Unirest;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 
-import java.rmi.ConnectException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
