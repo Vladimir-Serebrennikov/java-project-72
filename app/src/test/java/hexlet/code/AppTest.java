@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 class AppTest {
     Javalin app;
@@ -59,7 +58,7 @@ class AppTest {
         var body = Files.readString(Paths.get(file));
         mockWebServer.enqueue(new MockResponse().setBody(body));
         var serverUrl = mockWebServer.url("/").toString();
-        var actualUrl = new Url(serverUrl, new Timestamp(System.currentTimeMillis()));
+        var actualUrl = new Url(serverUrl);
         UrlsRepository.save(actualUrl);
         JavalinTest.test(app, (server, client) -> {
             client.post("/urls/" + actualUrl.getId() + "/checks");

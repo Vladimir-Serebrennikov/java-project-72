@@ -1,7 +1,6 @@
 package hexlet.code.controller;
 
 import java.net.MalformedURLException;
-import java.sql.Timestamp;
 import java.util.Collections;
 
 import hexlet.code.dto.BasePage;
@@ -38,8 +37,7 @@ public class UrlsController {
                     startUrl.getHost(),
                     startUrl.getPort() == -1 ? "" : ":" + startUrl.getPort()
             ).toLowerCase();
-            var createdAt = new Timestamp(System.currentTimeMillis());
-            var url = new Url(normalUrl, createdAt);
+            var url = new Url(normalUrl);
             if (!UrlsRepository.findByName(url.getName()).equals(Optional.empty())) {
                 ctx.sessionAttribute("flash", "Страница уже существует");
                 ctx.redirect(NamedRoutes.urlsPath());
