@@ -4,7 +4,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/3e194f34f058f463dff7/test_coverage)](https://codeclimate.com/github/Vladimir-Serebrennikov/java-project-72/test_coverage)
 
 ### Description
-Page Analyzer is a comprehensive website based on the Javelin framework designed for analyzing specified pages for SEO suitability. It incorporates the fundamental principles of modern website development using the MVC architecture, encompassing routing, request handling, templating, and database interaction through ORM.
+Page Analyzer is a comprehensive website based on the Javalin framework designed for analyzing specified pages for SEO suitability. It incorporates the fundamental principles of modern website development using the MVC architecture, encompassing routing, request handling, templating, and database interaction through ORM.
 
 Key technologies involved include: 
 - Frontend: Bootstrap;
